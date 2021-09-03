@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(241, 227, 101);
+}
+
+footer {
+
+    transform: rotateX(180deg);
+}
+
+h1 {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
+
+img {
+    text-align: center;
+}
