@@ -1,0 +1,57 @@
+body {
+    background-color: black;
+    color: white;
+}
+code {
+
+    background-color: #ece9e9;
+    color: rgb(255, 10, 92);
+
+}
+
+img.blurred {
+    filter:blur(5px);
+}
+
+img.brighter {
+    filter:brightness(150%);
+}
+
+img.contrast {
+    filter:contrast(150%)
+}
+
+img.invert {
+    filter:invert(100%)
+}
+
+img.opacity {
+    filter:opacity(30%);
+}
+
+img.saturate {
+    filter:saturate(8);
+}
+
+figure {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    margin: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    font-family: sans-serif;
+    background-color: black;
+    vertical-align: top;
+}
+
+figure > img {
+    background-color: white;
+    margin: 5px 0;
+    padding: 5px;
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+}
