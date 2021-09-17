@@ -1,0 +1,51 @@
+/* 
+    Task 1 CSS
+    by Aric Flor & Lexie Pearce
+*/
+body {
+    margin: 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 100vh;
+
+}
+
+.left {
+    background-color: coral;
+    font-size: xx-large;
+    flex-basis: 75px;
+    height: 100vh;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.emoji {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.trash {
+    display: flex;
+}
+
+.pictures {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    flex-wrap: wrap;
+}
+
+.pictures > img {
+    padding: 0.2%;
+    height: 200px;
+    flex-grow: 1;
+}

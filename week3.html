@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="week3.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Blog</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <center>Week 3: 9/13-9/17 Blog</center>
+        </h1>
+        <h5><a href="index.html">GO BACK</a></li>
+        </h5>
+    </header>
+
+    <main>
+        <p>
+            Flexboxes are so cool!! Week 3 was all about flexboxes. The labs with week
+            were very challenging to me, but the product of the labs are so worth it.
+            What was most challenging for me was in when we needed to create multiple
+            containers and figuring out how to navigate a child in one container
+            differently then a child in the other container. This is <a href="task1.html">Task 1</a>
+            from Lab 7. Task 1 Lab 7 is what I am most proud of from this week. I really liked
+            the way <code>flex-wrap</code> and <code>flex-grow</code> worked to make the images on 
+            the screen wrap as you changed the size of the screen.
+
+        </p>
+
+        <p>
+            What I learned this week is outside of class is how to add a Title Tooltip to your HTML page!
+            This Title Tooltip is so useful for showing extra information about a clearly selected element.
+            <b><span title="You're a wizard Harry!!! :)">If you hover over this sentence you will
+                see the a nice message and Title Tooltip in action!!</span></b> Below is the snippet of code 
+                I used to implement this feature.
+        </p>
+
+        <p>
+            <code><pre>&ltspan&gt title="You're a wizard Harry!!! :)">If you hover over this sentence you will see the a nice message and Title Tooltip in action!!&lt/span&gt</pre></code>
+        </p>
+
+        <p>
+            Since the Title Tooltip was so easy to implement I also looked up how to make text scroll in CSS. Scrolling text can be very useful on websites to catch the eye of users
+            and great for advertising on websites. What's cool about this feature is you can make it scroll from right to left,
+            left to right, up to down, or down to up. You can determine the direction of the scrolling by modifying the <code>transform translateX</code> to scroll horizontally on the x-axis and 
+            <code>transform translateY</code> to scroll vertically on the y-axis. To make the text scroll from left to right you pass in a positive percentage in as the parameter for <code>translateX</code>
+            and a negative percentage value to scroll from right to left. Likewise, to make text scroll down to up, you would pass a positive percentage in as the parameter for 
+            <code>translateY</code> and a negative percentage to scroll from up to down. Below is my implementation of the scroll animation in CSS. Do you recognize the sentence being scrolled?
+            If not it's the first sentence <a href="https://eg4.nic.in/jnv/DFILES/EBOOKS/IR/Harry-potter-sorcerers-stone.pdf"><u>Harry Potter and the Sorcerer's Stone</u></a> (I am a <b>HUGE</b> Harry Potter Fan :).
+
+            <div id="scroll">
+                <div id="text">"The hottest day of the summer so far was drawing to a close and a drowsy silence lay over the large, square houses of Privet Drive.”</div>
+            </div>
+
+            <h3>Below, is the HTML and CSS code for the feature above.</h3>
+
+            <code><pre>
+&ltdiv id="scroll"&gt
+    &ltdiv id="The hottest day of the summer so far was drawing to a close and a drowsy silence lay over the large, square houses of Privet Drive.”&lt/div&gt
+&lt/div&gt
+            </pre></code>
+
+            <code><pre>
+#container {
+    border: 3px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#text {
+    transform: translateX(100%);
+    
+    animation: scroll-animation 30s linear infinite;
+    }
+    
+    @keyframes scroll-animation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+            </pre></code>
+
+
+        </p>
+        <footer>If you want to learn more, <a href="https://blog.hubspot.com/website/scrolling-text-css">here</a> and <a
+            href="https://www.html.am/html-codes/marquees/css-scrolling-text.cfm">here</a> are two links that were helpful to me! :)</footer>
+    </main>
