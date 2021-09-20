@@ -1,4 +1,3 @@
-
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #282828;
@@ -27,37 +26,10 @@
     color: white;
   }
 
-body {
+  body {
     color: aliceblue;
     background-color: black;
     background-image: url("galaxy1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-}
-figure {
-    display: inline-block;
-    width: 400px;
-    height: 600px;
-    margin: 5px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-
-    font-family: sans-serif;
-    background-color: #282828;
-    vertical-align: top;
-}
-
-img {
-    background-color: #D9B08C;
-    margin: 5px 0;
-    padding: 5px;
-    width: 100%;
-    height: 480px;
-    box-sizing: border-box;
-}
-
-figure > h1 {
-    margin: 0;
-    text-align: center;
 }

@@ -5,26 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="signup.css">
     <title>Log in</title>
 </head>
 
 <body>
-    <header>
-        <h1>Sign up</h1>
-        <h5><a href="index.html">GO HOME</a></li></h5>
-    </header>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a class="active" href="signup.html">Sign Up</a>
+        <a href="login.html">Log in</a>
+    </div>
+    <center>
+        <h1>Sign Up</h1>
+    </center>
 
-    <h2>Name</h2>
+    <div class="name_section">
+        <h2>Name</h2>
+    </div>
     <p>Your name, gender, and date of birth should match the ID you show
-        at the flight favility.
+        at the flight facility.
     </p>
-    <p><div><label for="firstname">First name</label></div>
-        <div><input id="firstname" type="text"></div></p>
-    <p><div><label for="middlename">Middle name</label></div>
-        <div><input id="middlename" type="text"></div></p>
-    <p><div><label for="lastname">Last name</label></div>
-        <div><input id="lastname" type="text"></div></p>
+    <p>
+    <div><label for="firstname">First name</label></div>
+    <div><input id="firstname" type="text"></div>
+    </p>
+    <p>
+    <div><label for="middlename">Middle name</label></div>
+    <div><input id="middlename" type="text"></div>
+    </p>
+    <p>
+    <div><label for="lastname">Last name</label></div>
+    <div><input id="lastname" type="text"></div>
+    </p>
 
     <p><label>Date of Birth <input type="date"></label></p>
 
@@ -35,10 +47,12 @@
             <option>Female (F)</option>
             <option>Male (M)</option>
         </select>
-        As listed on your photo ID
+            <br><br>
+            As listed on your photo ID
     </p>
-
-    <h2>Address</h2>
+    <div class="address_section">
+        <h2>Address</h2>
+    </div>
     <p>
         Country / region
         <select id="country" name="country">
@@ -292,11 +306,15 @@
             <option value="Zimbabwe">Zimbabwe</option>
         </select>
     </p>
-    <p><div><label for="address">Address</label></div>
-        <div><input id="address" type="text"></div></p>
+    <p>
+    <div><label for="address">Address</label></div>
+    <div><input id="address" type="text"></div>
+    </p>
 
-    <p><div><label for="city">City</label></div>
-        <div><input id="city" type="text"></div></p>
+    <p>
+    <div><label for="city">City</label></div>
+    <div><input id="city" type="text"></div>
+    </p>
     <p>
         State
         <select>
@@ -352,25 +370,34 @@
             <option value="WV">West Virginia</option>
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
-        </select>    
+        </select>
     </p>
 
-    <p><div><label for="postalcode">Postal Code </label></div>
-        <div><input id="postalcode" type="text"></div></p>
+    <p>
+    <div><label for="postalcode">Postal Code </label></div>
+    <div><input id="postalcode" type="text"></div>
+    </p>
 
-    <h2>Email and Phone</h2>
-    <p><div><label for="email">Primary Email </label></div>
-        <div><input id="email" type="text"></div>
+    <div class="email_phone_section">
+        <h2>Email and Phone</h2>
+    </div>
+    <p>
+    <div><label for="email">Primary Email </label></div>
+    <div><input id="email" type="text"></div>
 
-    <p><div><label for="phone">Primary Phone Number </label></div>
-        <div><input id="phone" type="text"></div>
+    <p>
+    <div><label for="phone">Primary Phone Number </label></div>
+    <div><input id="phone" type="text"></div>
 
-    <h2>Create your account</h2>
-    <p><div><label for="password">Password </label></div>
-        <div><input id="password" type="text"></div>
+    <div class="create_account_section">
+        <h2>Create your account</h2>
+    </div>
+    <p>
+    <div><label for="password">Password </label></div>
+    <div><input id="password" type="text"></div>
 
     <p><button type="button">Sign Up!</button></p>
 
 
-    
+
 </body>

@@ -10,9 +10,15 @@
 </head>
 
 <body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Log in</a>
+    </div>
     <header>
-        <center><h1>Booking</h1></center> 
-        <h5><a href="index.html">GO HOME</a></li></h5>
+        <center>
+            <h1>Booking</h1>
+        </center>
     </header>
 
     <main>
@@ -22,11 +28,26 @@
 
         <p>
             <label><input type="checkbox"> Round Trip</label>
-            <label><input type="checkbox" checked> One Way</label>
+            <label><input type="checkbox"> One Way</label>
         </p>
 
         <p>
-             From
+            Number of Passengers
+            <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+            </select>
+        </p>
+
+        <p>
+            From
             <select>
                 <option>--</option>
                 <option>Wallops Flight Facility (VA)</option>
@@ -35,8 +56,8 @@
                 <option>Kennedy Space Center (FL)</option>
                 <option>Lyndon B. Johnson Space Center (TX)</option>
                 <option>Houston Space Center (TX)</option>
-            </select> 
-    
+            </select>
+
             To
             <select>
                 <option>--</option>
@@ -45,8 +66,10 @@
             </select>
         </p>
 
+        <p><button type="button">Book Trip</button></p>
 
 
-        
+
+
     </main>
 </body>
