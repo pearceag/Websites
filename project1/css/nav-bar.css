@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 995px) {
   .footer {
     height: 30vh;
   }
