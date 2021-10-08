@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="week2.css">
+    <link rel="stylesheet" href="week6.css">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6 Blog</title>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="week1.html">Week 1</a>
+        <a href="week2.html">Week 2</a>
+        <a href="week3.html">Week 3</a>
+        <a href="week4.html">Week 4</a>
+        <a class="active" href="week6.html">Week 6</a>
+    </div>
+
+    <header>
+        <center>
+            <h1>Week 6: 10/4 - 10/8</h1>
+        </center>
+    </header>
+
+    <main>
+        <p>
+            I'm back!! Last week we had Project 1 due so we didn't have time to write a weekly blog as well.
+            This week though was exciting! We upgraded to javascript. I really loved the second lab we had
+            this week when we wrote out own shell using Node.js. I didn't fully complete the lab, but I
+            implemented the <code>exit</code> and <code>pwd</code> commands. In this lab, I also learned
+            how to convert a callback scheme into a promise scheme. I created a promise constructor <code>ask()</code>
+            that expected the <code>readline.question</code> function as its parameter. Then, it hands that function 
+            another function, <code>resolve</code> which is called when my asynchronous operation finishes. You can see
+            this implemented below:
+
+            <code><pre>
+    const fsPromises = require('fs').promises;
+    const path = require('path');
+    const http = require('http');
+
+    const readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    
+    function ask() {
+        return new Promise(resolve => {
+            readline.question('> ', answer => resolve(answer));
+        });
+    }
+
+    async function main() {
+    while (true) {
+        const response = await ask();
+        switch(response) {
+            case('exit'):
+                console.log('Exiting...');
+                process.exit();
+                break;
+            case('pwd'):
+                console.log(process.cwd());
+                break;
+            default:
+                break;
+        }
+    }
+            </pre></code>
+        </p>
+            Outside of class, I learned how to make an image pop-up when a user hovers over it. What I did was set three images side by side using
+            an unordered list. I put the unordered list in a flexbox. 
+            <code><pre>
+        ul {
+            display: flex;
+            }
+        
+            li {
+            list-style-type: none;
+            padding: 10px;
+            position: relative;
+            }
+            </pre></code>
+            
+            To visually hig the larger image, I used absolute positioning and put the larger
+            images in a <code>span</code>. This should make it so that only the smaller images are left.
+
+            <code>
+                <pre>
+            .large {
+                position: absolute;
+                left: -9999px;
+                }
+                </pre>
+            </code>
+
+            Next, I added some styles to make the larger image actually pop-up and look like it is hovering
+            over the smaller images.
+
+            <code>
+                <pre>
+            li:hover .large {
+                left: 20px;
+                top: -150px;
+                }
+
+                .large-image {
+                    border-radius: 4px;
+                     box-shadow: 1px 1px 3px 3px rgba(127, 127, 127, 0.15);;
+                  }
+                </pre>
+            </code>
+
+        Check out the full implementation below!
+
+        <p>
+            <ul>
+                <li>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg" height=200 width=200 alt="jupiter" >
+                  <span class="large">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg" height=400 width=400 class="large-image" alt="jupiter-large" >
+                  </span>
+                </li>
+                <li>
+                  <img src="https://cdn.mos.cms.futurecdn.net/3upZx2gxxLpW7MBbnKYQLH-1200-80.jpg"  height=200 width=200 alt="earth" >
+                  <span class="large">
+                     <img src="https://cdn.mos.cms.futurecdn.net/3upZx2gxxLpW7MBbnKYQLH-1200-80.jpg" height=400 width=400 class="large-image" alt="earth-large" >
+                  </span>
+                </li>
+                <li>
+                    <img src="https://scx2.b-cdn.net/gfx/news/hires/2019/4-mars.jpg"  height=200 width=200 alt="mars" >
+                    <span class="large">
+                      <img src="https://scx2.b-cdn.net/gfx/news/hires/2019/4-mars.jpg" height=400 width=400 class="large-image" alt="mars-large" >
+                    </span>
+                </li>
+              </ul>
+        </p>
+
+    </main>
+
+    <footer> Learn more about the implementation of the navigation bar <a href="https://dev.to/sarah_chima/image-popup-on-hover-1kee">Here</a>!</footer>
+
+</body>
+
+</html>

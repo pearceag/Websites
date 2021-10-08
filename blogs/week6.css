@@ -1,0 +1,40 @@
+ul {
+    display: flex;
+  }
+
+  li {
+    list-style-type: none;
+    padding: 90px;
+    position: relative;
+  }
+
+  .large {
+    position: absolute;
+    left: -9999px;
+  }
+
+  li:hover .large {
+    left: 20px;
+    top: -150px;
+  }
+
+  .large-image {
+    border-radius: 4px;
+     box-shadow: 1px 1px 3px 3px rgba(127, 127, 127, 0.15);;
+  }
+
+  pre {
+    background-color: #D0D0D0;
+    color: rgb(6, 6, 100);
+    font-weight: bold;
+    border-style: double;
+    border-width: 5px;
+    border-radius: 7px;
+    border-color: black;
+}
+
+code {
+    background-color: #D0D0D0;
+    color: rgb(6, 6, 100);
+    font-weight: bold;
+}
