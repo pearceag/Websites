@@ -18,8 +18,9 @@ connection.connect(err => {
     console.log('MySQL Connected')
 });
 
-const selectQuery = 'SELECT * FROM memory';
-connection.query(selectQuery, (error, rows) => {
+const insertQuery = 'INSERT INTO memory(year, month, day, entry) VALUES (?, ?, ?, ?)';
+const parameters = [2019, 3, 19, 'I was born.'];
+connection.query(insertQuery, parameters, (error, rows) => {
   if (error) {
     console.error(error);
   } else {
