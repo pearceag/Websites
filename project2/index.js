@@ -1,4 +1,5 @@
 const express = require('express');
+const service = express()
 const mysql = require('mysql');
 const fs = require('fs');
 
@@ -16,8 +17,6 @@ connection.connect(err => {
     }
     console.log('MySQL Connected')
 });
-
-const service = express()
 
 const selectQuery = 'SELECT * FROM memory';
 connection.query(selectQuery, (error, rows) => {
