@@ -19,8 +19,14 @@ connection.connect(err => {
 
 const service = express()
 
-// Endpoints
-
+const selectQuery = 'SELECT * FROM memory';
+connection.query(selectQuery, (error, rows) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(rows);
+  }
+});
 
 const port = 5000;
 service.listen(port, () => {
