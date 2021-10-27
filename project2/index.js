@@ -1,36 +1,39 @@
-const express = require('express');
-const service = express()
-const mysql = require('mysql');
-const fs = require('fs');
+app.use(express.json());
+connection.connect();
 
-service.use(express.json());
-
-const json = fs.readFileSync('credentials.json', 'utf8');
-const credentials = JSON.parse(json)
-
-const connection = mysql.createConnection(credentials);
-
-connection.connect(err => {
-    if (err) {
-        console.error(err);
-        process.exit(1);
-    }
-    console.log('MySQL Connected')
+const port = 5001;
+app.listen(port, () => {
+  console.log("We're live on port 5001");
 });
 
-const insertQuery = 'INSERT INTO memory(year, month, day, entry) VALUES (?, ?, ?, ?)';
-const parameters = [2019, 3, 19, 'I was born.'];
-connection.query(insertQuery, parameters, (error, rows) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log(rows);
-  }
-});
+function rowToPlaylist(row) {
+  return {
+    songName: row.songName,
+    artist: row.artist,
+    album: row.album,
+    genre: row.genre,
+  };
+}
 
-const port = 5000;
-service.listen(port, () => {
-    console.log(`We're live on port ${port}!`);
-});
+//Get song name  from the table playlst where the songs  are
+app.get('/playlist/:songName', (request, response) => {
+  const query = 'SELECT songName, artist, album, genre  FROM playlist';
+  const params = [request.params.songName];
+   connection.query(query, params, (error, rows) => {
+    response.send({
+      ok: true,
+      playlist: rows.map(rowToPlaylist),
+    })
+  })
+})
 
-connection.end();
+//Add a new song to playlist with the parameters found in the body of the request.
+app.post('/playlist/', (request, response) => {
+  const query = 'INSERT INTO playlist(songName, artist, album, genre) VALUES (?,?,?,?)';
+  const params = [request.body.songName, request.body.artist, request.body.album, request.body.genre];
+  connection.query(query, params, (error, result) => {
+    response.send({
+      okay: true,
+    });
+  });
+});
