@@ -44,6 +44,31 @@ const query = 'SELECT * FROM playlist';
   });
 });
 
+// Gets the songs by specified artists
+app.get('/playlist/:artist', (request, response) => {
+  const parameters = [
+    request.params.artist,
+  ];
+
+  const query = 'SELECT * FROM playlist WHERE artist = ?';
+  connection.query(query, parameters, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const songs = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: rows.map(rowToPlaylist),
+      });
+    }
+  });
+});
+
+
 //Add a new song to playlist with the parameters found in the body of the request.
 app.post('/playlist/', (request, response) => {
   if (request.body.hasOwnProperty('songName') &&
