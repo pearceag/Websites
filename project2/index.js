@@ -1,3 +1,10 @@
+const express = require('express');
+const fs = require('fs');
+const mysql = require('mysql');
+
+const table = JSON.parse(fs.readFileSync('credentials.json', 'utf8'));
+const connection = mysql.createConnection(table);
+
 app.use(express.json());
 connection.connect();
 
