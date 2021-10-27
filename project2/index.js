@@ -5,6 +5,8 @@ const mysql = require('mysql');
 const table = JSON.parse(fs.readFileSync('credentials.json', 'utf8'));
 const connection = mysql.createConnection(table);
 
+app = express();
+
 app.use(express.json());
 connection.connect();
 
@@ -15,6 +17,7 @@ app.listen(port, () => {
 
 function rowToPlaylist(row) {
   return {
+    id: row.id,
     songName: row.songName,
     artist: row.artist,
     album: row.album,
@@ -22,25 +25,61 @@ function rowToPlaylist(row) {
   };
 }
 
-//Get song name  from the table playlst where the songs  are
-app.get('/playlist/:songName', (request, response) => {
-  const query = 'SELECT songName, artist, album, genre  FROM playlist';
-  const params = [request.params.songName];
+//Get
+app.get('/playlist', (request, response) => {
+  const query = 'SELECT * FROM playlist';
    connection.query(query, params, (error, rows) => {
-    response.send({
-      ok: true,
-      playlist: rows.map(rowToPlaylist),
-    })
-  })
-})
+     if(error) {
+       response.status(500);
+       response.json({
+         ok: false,
+         result: error.message,
+       });
+     } else {
+       const playlist = rows.map(rowToPlaylist);
+       response.json({
+         ok: true,
+         results: rows.map(rowToPlaylist),
+       });
+     }
+  });
+});
 
 //Add a new song to playlist with the parameters found in the body of the request.
 app.post('/playlist/', (request, response) => {
-  const query = 'INSERT INTO playlist(songName, artist, album, genre) VALUES (?,?,?,?)';
-  const params = [request.body.songName, request.body.artist, request.body.album, request.body.genre];
-  connection.query(query, params, (error, result) => {
-    response.send({
-      okay: true,
+  if (request.body.hasOwnProperty('songName') && 
+      request.body.hasOwnProperty('artist') &&
+      request.body.hasOwnProperty('album') &&
+      request.body.hasOwnProperty('genre')) {
+      
+    const params = [
+      request.body.songName,
+      request.body.artist,
+      request.body.album,
+      request.body.genre,
+    ];
+        
+    const query = 'INSERT INTO playlist(songName, artist, album, genre) VALUES (?,?,?,?)';
+    connection.query(query, params, (error, result) => {
+      if (error) {
+        response.status(500);
+        response.json({
+          ok: false,
+          results: error.message,
+        });
+      } else {
+        response.json({
+          ok: true,
+          results: result.insertId,
+        });
+      }
     });
-  });
+
+  } else {
+    response.status(400);
+    response.json({
+      ok: false,
+      results: 'Incomplete memory.',
+    });
+  }
 });
