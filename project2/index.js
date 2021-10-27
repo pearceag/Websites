@@ -12,53 +12,52 @@ connection.connect();
 
 const port = 5001;
 app.listen(port, () => {
-  console.log("We're live on port 5001");
+console.log("We're live on port 5001");
 });
 
 function rowToPlaylist(row) {
-  return {
-    id: row.id,
-    songName: row.songName,
-    artist: row.artist,
-    album: row.album,
-    genre: row.genre,
-  };
+return {
+  songName: row.songName,
+  artist: row.artist,
+  album: row.album,
+  genre: row.genre,
+};
 }
 
-//Get
+//Get all info in playlist
 app.get('/playlist', (request, response) => {
-  const query = 'SELECT * FROM playlist';
-   connection.query(query, params, (error, rows) => {
-     if(error) {
-       response.status(500);
-       response.json({
-         ok: false,
-         result: error.message,
-       });
-     } else {
-       const playlist = rows.map(rowToPlaylist);
-       response.json({
-         ok: true,
-         results: rows.map(rowToPlaylist),
-       });
-     }
+const query = 'SELECT * FROM playlist';
+  connection.query(query, (error, rows) => {
+    if(error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        result: error.message,
+      });
+    } else {
+      const playlist = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: rows.map(rowToPlaylist),
+      });
+    }
   });
 });
 
 //Add a new song to playlist with the parameters found in the body of the request.
 app.post('/playlist/', (request, response) => {
-  if (request.body.hasOwnProperty('songName') && 
+  if (request.body.hasOwnProperty('songName') &&
       request.body.hasOwnProperty('artist') &&
       request.body.hasOwnProperty('album') &&
       request.body.hasOwnProperty('genre')) {
-      
+
     const params = [
       request.body.songName,
       request.body.artist,
       request.body.album,
       request.body.genre,
     ];
-        
+
     const query = 'INSERT INTO playlist(songName, artist, album, genre) VALUES (?,?,?,?)';
     connection.query(query, params, (error, result) => {
       if (error) {
