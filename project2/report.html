@@ -1,0 +1,11 @@
+curl --header 'Content-Type: application/json' \
+  --data '{"songName": "Say It", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
+  http://localhost:5001/playlist
+
+
+  curl --header 'Content-Type: application/json' \
+  --request PATCH \
+  --data '{"songName": "Beat it", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
+  http://localhost:5001/playlist/1
+
+ 
