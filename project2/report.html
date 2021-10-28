@@ -1,11 +1,44 @@
-curl --header 'Content-Type: application/json' \
-  --data '{"songName": "Say It", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
-  http://localhost:5001/playlist
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 Report</title>
+</head>
+
+<body>
+    <main>
+        <p>1. This service is not a to-do list. It is a service similar to how playlists store information.</p>
+        <p>2. My app uses MySQL and only uses one table called playlist-table.</p>
+        <p>3. My app provides an Express-based web service for interacting with the database.</p>
+        <p>4. My web service is available via <code>https://project2.lexiepearce.me:8443/</code>.</p>
+        <p>5. The endpoints of the web service and any parameters are named approriately.</p>
+        <p>6. My web service sends and receives complex data as JSON.</p>
+        <p>7. The full spectruc of CRUD operations are supported.</p>
+        <p>8. I use <code>ufw</code> to block all ports, but the ones I need for SSH and my allowed web servers.</p>
+        <p>9. I created a Nginx server that allows global, encrypted access to my web service.</p>
+        <p>10. My web service supports cross-orgin resource sharing using custom middleware and an <code>options</code> wildcard endpoint.</p>
+        <p>11. My web service is started using the process manager <code>pm2</code>.</p>
+        <p>12. My service is stored in my github repo: https://github.com/pearceag/cs347/tree/master/project2. </p>
+        <p>13. My database's creationg and schema scripts are included in my repository.</p>
+        <p>14. My github repo shows a stead flow of commits and pushes.</p>
+        <p>15. My service responds to <code>https://project2.lexiepearce.me:8443/report.html</code>.</p>
+        <p>
+        <code>curl --header 'Content-Type: application/json' \
+            --data '{"songName": "Say It", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
+            http://localhost:5001/playlist</code>
+          
+          
+        <code>curl --header 'Content-Type: application/json' \
+            --request PATCH \
+            --data '{"songName": "Beat it", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
+            http://localhost:5001/playlist/1</code>
+        </p>
+
+    </main>
+</body>
 
 
-  curl --header 'Content-Type: application/json' \
-  --request PATCH \
-  --data '{"songName": "Beat it", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
-  http://localhost:5001/playlist/1
 
  
