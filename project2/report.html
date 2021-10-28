@@ -24,15 +24,27 @@
         <p>13. My database's creationg and schema scripts are included in my repository.</p>
         <p>14. My github repo shows a stead flow of commits and pushes.</p>
         <p>15. My service responds to <code>https://project2.lexiepearce.me:8443/report.html</code>.</p>
+
+        <h2>Endpoint Explanation</h2>
+        <p><code>'/report.html'</code>: takes you to this page</p>
+        <p><code>'/playlist'</code>: selects all items in the playlist</p>
+        <p><code>'/playlist/artist/:artist'</code>: selects all the playlist items with the same artist</p>
+        <p><code>'/playlist/genre/:genre'</code>: selects all the playlist items with the same genre</p>
+        <p><code>'/playlist/album/:album'</code>: selects all the playlist items with the same album</p>
+        <p><code>'/playlist/songName/:songName</code>: selects all the playlist items with the same song name</p>
+        <p><code>post '/playlist/</code>: inserts new item to the playlist</p>
+        <p><code>patch '/playlist/:id'</code>: updates the playlist item indicated by the id param</p>
+        <p><code>delete '/playlist/:id</code>: deletes item in playlist at indicated by the id param</p>
+
         <p>
         <code>curl --header 'Content-Type: application/json' \
-            --data '{"songName": "Say It", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
+            --data '{"songName": "SayIt", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
             http://localhost:5001/playlist</code>
           
           
         <code>curl --header 'Content-Type: application/json' \
             --request PATCH \
-            --data '{"songName": "Beat it", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
+            --data '{"songName": "Beatit", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
             http://localhost:5001/playlist/1</code>
         </p>
 
