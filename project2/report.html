@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <center><header><h1>Project 2 Report</h1></header></center>
     <main>
         <p>1. This service is not a to-do list. It is a service similar to how playlists store information.</p>
         <p>2. My app uses MySQL and only uses one table called playlist-table.</p>
@@ -25,7 +26,7 @@
         <p>14. My github repo shows a stead flow of commits and pushes.</p>
         <p>15. My service responds to <code>https://project2.lexiepearce.me:8443/report.html</code>.</p>
 
-        <h2>Endpoint Explanation</h2>
+        <h3>Endpoint Explanation</h3>
         <p><code>'/report.html'</code>: takes you to this page</p>
         <p><code>'/playlist'</code>: selects all items in the playlist</p>
         <p><code>'/playlist/artist/:artist'</code>: selects all the playlist items with the same artist</p>
@@ -37,17 +38,31 @@
         <p><code>delete '/playlist/:id</code>: deletes item in playlist at indicated by the id param</p>
 
         <p>
+        <h3>POST Curl Command</h3>
         <code>curl --header 'Content-Type: application/json' \
-            --data '{"songName": "SayIt", "artist": "MaggieRogers", "album": "Red", "genre": "Alternative"}' \
+            --data '{"songName": "Peaches", "artist": "Bieber", "album": "Justice", "genre": "Pop"}' \
             http://localhost:5001/playlist</code>
           
-          
+        <h3>PATCH Curl Command</h3>
         <code>curl --header 'Content-Type: application/json' \
             --request PATCH \
-            --data '{"songName": "Beatit", "artist": "Rogers", "album": "Red", "genre": "Alternative"}' \
+            --data '{"songName": "AsIAm", "artist": "Bieber", "album": "Justice", "genre": "Pop"}' \
             http://localhost:5001/playlist/1</code>
-        </p>
 
+        <h3>GET Curl Commands</h3>
+        <code> curl http://localhost:5001/playlist/artist/Bieber</code>
+
+        <code>curl http://localhost:5001/playlist/songName/Peaches</code>
+
+        <code>curl http://localhost:5001/playlist/album/Justice</code>
+
+        <code>curl http://localhost:5001/playlist/genre/Pop</code>
+
+        <h3>DELTE Curl Command</h3>
+        <code> curl --request DELETE \
+            http://localhost:5001/playlist/1</code>
+
+        </p>
     </main>
 </body>
 
