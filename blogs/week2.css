@@ -1,14 +1,3 @@
-body {
-    background-color: #292929;
-    color: white;
-}
-code {
-
-    background-color: #ece9e9;
-    color: rgb(255, 10, 92);
-
-}
-
 img.blurred {
     filter:blur(5px);
 }
@@ -56,30 +45,3 @@ figure > img {
     box-sizing: border-box;
 }
 
-/* Add a pinkish background color to the top navigation */
-.topnav {
-    background-color: #116466;
-    overflow: hidden;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #D9B08C;
-    color: white;
-  }

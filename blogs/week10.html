@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="week10.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10 Blog</title>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="week1.html">Week 1</a>
+        <a href="week2.html">Week 2</a>
+        <a href="week3.html">Week 3</a>
+        <a href="week4.html">Week 4</a>
+        <a href="week6.html">Week 6</a>
+        <a href="week7_demo.html">Week 7</a>
+        <a class="active" href="week10.html">Week 10</a>
+    </div>
+
+    <header>
+        <center><h1>Week 10: 11/1 - 11/5</h1></center>
+    </header>
+    <main>
+        <body>
+            <p>Wow it's been a while! I've learned a bunch these past few weeks. To start off, in project 2
+                implemented a webservice which allows a useer to create a playlist. I learned how to use 
+                a Node.js web application framework, express to support CRUD operations. I also got my feetwet
+                with mySQL to create a realtional database. This week in class, we are learning front-end frameworks
+                such as REACT. For <a href="https://replit.com/@Pokemaniac00/Lab18#src/App.jsx">lab 16</a> we created
+                the Acrostic game. It doesn't work fully, but you are able to look at the code that we have if you wish.
+            </p>
+
+            <p>This week outside of class, I looked into how to create Dark Mode on a page by pressing a button. I used 
+                both Javascript and CSS to complete this task. Below is the code for the Javascript that triggers dark-mode
+                when pressed:
+                <code>
+                    <pre>
+function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+}
+                    </pre>
+                </code>
+                Then in my CSS file I had to define what dark-mode looked like. I needed to change the background color to a 
+                darker color and change the text to white. See the code below:
+                <code>
+                    <pre>
+.dark-mode {
+    background-color: #292929;
+    color: white;
+    }
+                    </pre>
+                </code>
+            </p>
+
+            <button onclick="myFunction()">Toggle dark mode</button>
+            <script>
+                function myFunction() {
+                    var element = document.body;
+                    element.classList.toggle("dark-mode");
+                }
+            </script>
+        </body>
+        <center><footer> Learn more about this implementation of changing to dark mode <a href="https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp">here</a>!</footer></center>
+    </main>
