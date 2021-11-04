@@ -8,3 +8,4 @@ CREATE TABLE playlist(
   genre TEXT,
   is_deleted INT DEFAULT 0
 );
+

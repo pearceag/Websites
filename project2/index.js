@@ -74,13 +74,16 @@ app.get('/playlist/artist/:artist', (request, response) => {
     request.params.artist,
   ];
 
+  const currArtist = parameters.replace('/_/g, ""');
+
   const query = 'SELECT * FROM playlist WHERE artist = ? AND is_deleted = 0';
-  connection.query(query, parameters, (error, rows) => {
+  connection.query(query, currArtist, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
         ok: false,
         results: error.message,
+        console.log('Unable to select ${parameters}');
       });
     } else {
       const songs = rows.map(rowToPlaylist);
@@ -98,8 +101,10 @@ app.get('/playlist/genre/:genre', (request, response) => {
     request.params.genre,
   ];
 
+  const currGenre = parameters.replace('/_/g, ""');
+
   const query = 'SELECT * FROM playlist WHERE genre = ? AND is_deleted = 0';
-  connection.query(query, parameters, (error, rows) => {
+  connection.query(query, currGenre, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -122,8 +127,10 @@ app.get('/playlist/album/:album', (request, response) => {
     request.params.album,
   ];
 
+  const currAlbum = parameters.replace('/_/g, ""');
+
   const query = 'SELECT * FROM playlist WHERE album = ? AND is_deleted = 0';
-  connection.query(query, parameters, (error, rows) => {
+  connection.query(query, currAlbum, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -146,8 +153,10 @@ app.get('/playlist/songName/:songName', (request, response) => {
     request.params.songName,
   ];
 
+  const currSong = parameters.replace('/_/g, ""');
+
   const query = 'SELECT * FROM playlist WHERE songName = ? AND is_deleted = 0';
-  connection.query(query, parameters, (error, rows) => {
+  connection.query(query, currSong, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -226,20 +235,27 @@ app.post('/playlist/', (request, response) => {
     ];
 
     const query = 'INSERT INTO playlist(songName, artist, album, genre) VALUES (?,?,?,?)';
-    connection.query(query, params, (error, result) => {
-      if (error) {
-        response.status(500);
-        response.json({
-          ok: false,
-          results: error.message,
-        });
-      } else {
-        response.json({
-          ok: true,
-          results: result.insertId,
-        });
-      }
-    });
+    if (!query.includes(params[0])) {
+      connection.query(query, params, (error, result) => {
+        if (error) {
+          response.status(500);
+          response.json({
+            ok: false,
+            results: error.message,
+          });
+        } else {
+          response.json({
+            ok: true,
+            results: 'Entry has been added to your playlist with id ${result.insertId}',
+          });
+        }
+      });
+    } else {
+      response.json({
+        ok: false,
+        results: 'Song is already in playlist.',
+      });
+    }
 
   } else {
     response.status(400);
@@ -249,3 +265,4 @@ app.post('/playlist/', (request, response) => {
     });
   }
 });
+
