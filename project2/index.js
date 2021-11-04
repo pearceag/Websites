@@ -83,7 +83,6 @@ app.get('/playlist/artist/:artist', (request, response) => {
       response.json({
         ok: false,
         results: error.message,
-        console.log('Unable to select ${parameters}');
       });
     } else {
       const songs = rows.map(rowToPlaylist);
