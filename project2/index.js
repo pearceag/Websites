@@ -21,16 +21,16 @@ app.listen(port, () => {
 });
 
 // Cross-orgin Resource Sharing
-app.use((request, response, next) => {
-  response.set('Access-Control-Allow-Origin', '*');
-  next();
-});
+// app.use((request, response, next) => {
+//   response.set('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 
-app.options('*', (request, response) => {
-  response.set('Access-Control-Allow-Headers', 'Content-Type');
-  response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
-  response.sendStatus(200);
-});
+// app.options('*', (request, response) => {
+//   response.set('Access-Control-Allow-Headers', 'Content-Type');
+//   response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+//   response.sendStatus(200);
+// });
 
 function rowToPlaylist(row) {
   return {
@@ -51,6 +51,7 @@ app.get('/report.html', (request, response) => {
 // Selects all items in playlist
 app.get('/playlist', (request, response) => {
   const query = 'SELECT * FROM playlist WHERE is_deleted = 0';
+  console.log("HEREEEEE");
   connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
