@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="week11.css">
+    <link rel="stylesheet" href="week12.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12 Blog</title>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="week1.html">Week 1</a>
+        <a href="week2.html">Week 2</a>
+        <a href="week3.html">Week 3</a>
+        <a href="week4.html">Week 4</a>
+        <a href="week6.html">Week 6</a>
+        <a href="week7_demo.html">Week 7</a>
+        <a href="week10.html">Week 10</a>
+        <a href="week11.html">Week 11</a>
+        <a class="active" href="week12.html">Week 12</a>
+    </div>
+
+    <header>
+        <center>
+            <h1>Week 12: 11/15 - 11/19</h1>
+        </center>
+    </header>
+    <main>
+        <p>This week in class I learned about Remote States and Multi-page Applications. I learned about another part of Redux which
+            is called the thunk creator. This is similar to an action creator, but instead it is a block of unevaluated code that gets
+            passed around in a system. I also learned how to <code>fetch</code> information from a web service. I attempted to do this
+            in the githubber lab. I'm still trying to get the <code>fetch</code> call to work. I found it interesting we put the fetching
+            code in an <code>actions.js</code> file since that's where we should put thunk creators since thunks are dispatched like actions
+            and they themselves dispatch actions. I also attempted to implement the QuizBuzz example from the textbook. I am an little 
+            unfamiliar with out the Multi-Page Application section of the textbook works all together. I'm sure after a lab and I get the 
+            QuizBuzz implementation working I will get a better understanding. I'm excited to apply these implementations to my Project 3.
+        </p>
+
+        <p>
+            Outside of class I learned how to create the Typewriter Effect in CSS. It's a very inventive and clever way to animate typing
+            and adds a bit of life to a webpage. Below is my implementation of the typewriter effect:
+        </p>
+        <div class="typewriter">
+            <h3>Hello CS347! This is Lexie's Blog :)</h3>
+        </div>
+
+        <p>
+            Below is the CSS code for this implementation:
+        </p>
+
+        <pre>
+            <code>             
+  /* DEMO-SPECIFIC STYLES */
+  .typewriter h3 {
+    color: #fff;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+  }
+            </code>
+        </pre>
+    </main>
+
+    <center>
+        <footer> Learn more about this "typewriter" implementation <a
+                href="https://css-tricks.com/snippets/css/typewriter-effect/">here</a>!</footer>
+    </center>
+
+</html>
