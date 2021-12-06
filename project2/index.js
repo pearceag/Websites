@@ -21,16 +21,16 @@ app.listen(port, () => {
 });
 
 // Cross-orgin Resource Sharing
-// app.use((request, response, next) => {
-//   response.set('Access-Control-Allow-Origin', '*');
-//   next();
-// });
+ app.use((request, response, next) => {
+   response.set('Access-Control-Allow-Origin', '*');
+   next();
+ });
 
-// app.options('*', (request, response) => {
-//   response.set('Access-Control-Allow-Headers', 'Content-Type');
-//   response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
-//   response.sendStatus(200);
-// });
+ app.options('*', (request, response) => {
+   response.set('Access-Control-Allow-Headers', 'Content-Type');
+   response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+   response.sendStatus(200);
+ });
 
 function rowToPlaylist(row) {
   return {
@@ -51,7 +51,6 @@ app.get('/report.html', (request, response) => {
 // Selects all items in playlist
 app.get('/playlist', (request, response) => {
   const query = 'SELECT * FROM playlist WHERE is_deleted = 0';
-  console.log("HEREEEEE");
   connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
@@ -69,16 +68,11 @@ app.get('/playlist', (request, response) => {
   });
 });
 
-// Selects all the playlists items with the same artist
-app.get('/playlist/artist/:artist', (request, response) => {
-  const parameters = [
-    request.params.artist,
-  ];
-
-  const currArtist = parameters.replace('/_/g, ""');
+// Selects all the artists in the playlist
+app.get('/playlist/artists/', (request, response) => {
 
   const query = 'SELECT * FROM playlist WHERE artist = ? AND is_deleted = 0';
-  connection.query(query, currArtist, (error, rows) => {
+  connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -86,10 +80,36 @@ app.get('/playlist/artist/:artist', (request, response) => {
         results: error.message,
       });
     } else {
-      const songs = rows.map(rowToPlaylist);
+      const artists = rows.map(rowToPlaylist);
       response.json({
         ok: true,
-        results: rows.map(rowToPlaylist),
+        results: artists,
+      });
+    }
+  });
+});
+
+// Selects all the playlists items with the same artist
+app.get('/playlist/artist/:artist', (request, response) => {
+  const parameters = [
+    request.params.artist,
+  ];
+
+ // const currArtist = parameters.replace('/_/g, ""');
+
+  const query = 'SELECT * FROM playlist WHERE artist = ? AND is_deleted = 0';
+  connection.query(query, parameters, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const items = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: items,
       });
     }
   });
@@ -112,10 +132,31 @@ app.get('/playlist/genre/:genre', (request, response) => {
         results: error.message,
       });
     } else {
-      const songs = rows.map(rowToPlaylist);
+      const items = rows.map(rowToPlaylist);
       response.json({
         ok: true,
-        results: rows.map(rowToPlaylist),
+        results: items,
+      });
+    }
+  });
+});
+
+// Select all songNames in playlist
+app.get('/playlist/genres/', (request, response) => {
+
+  const query = 'SELECT * FROM playlist WHERE genre = ? AND is_deleted = 0';
+  connection.query(query, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const genres = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: genres,
       });
     }
   });
@@ -138,10 +179,10 @@ app.get('/playlist/album/:album', (request, response) => {
         results: error.message,
       });
     } else {
-      const songs = rows.map(rowToPlaylist);
+      const items = rows.map(rowToPlaylist);
       response.json({
         ok: true,
-        results: rows.map(rowToPlaylist),
+        results: items,
       });
     }
   });
@@ -164,14 +205,36 @@ app.get('/playlist/songName/:songName', (request, response) => {
         results: error.message,
       });
     } else {
-      const songs = rows.map(rowToPlaylist);
+      const items = rows.map(rowToPlaylist);
       response.json({
         ok: true,
-        results: rows.map(rowToPlaylist),
+        results: items
       });
     }
   });
 });
+
+// Select all songNames in playlist
+app.get('/playlist/songs/', (request, response) => {
+
+  const query = 'SELECT * FROM playlist WHERE songName = ? AND is_deleted = 0';
+  connection.query(query, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const songs = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: songs,
+      });
+    }
+  });
+});
+
 
 
 // Updates the playlist item indicated by the id param
