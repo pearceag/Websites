@@ -21,16 +21,16 @@ app.listen(port, () => {
 });
 
 // Cross-orgin Resource Sharing
- app.use((request, response, next) => {
-   response.set('Access-Control-Allow-Origin', '*');
-   next();
- });
+app.use((request, response, next) => {
+  response.set('Access-Control-Allow-Origin', '*');
+  next();
+});
 
- app.options('*', (request, response) => {
-   response.set('Access-Control-Allow-Headers', 'Content-Type');
-   response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
-   response.sendStatus(200);
- });
+app.options('*', (request, response) => {
+  response.set('Access-Control-Allow-Headers', 'Content-Type');
+  response.set('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+  response.sendStatus(200);
+});
 
 function rowToPlaylist(row) {
   return {
@@ -40,6 +40,7 @@ function rowToPlaylist(row) {
     album: row.album,
     genre: row.genre,
     is_deleted: row.is_deleted,
+    image: row.image,
   };
 }
 
@@ -68,10 +69,32 @@ app.get('/playlist', (request, response) => {
   });
 });
 
+// Selects all the songs in the playlist
+app.get('/playlist/songs/', (request, response) => {
+
+  const query = 'SELECT songName FROM playlist WHERE is_deleted = 0';
+  connection.query(query, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const songs = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: songs,
+      });
+    }
+  });
+});
+
+
 // Selects all the artists in the playlist
 app.get('/playlist/artists/', (request, response) => {
 
-  const query = 'SELECT * FROM playlist WHERE artist = ? AND is_deleted = 0';
+  const query = 'SELECT DISTINCT artist FROM playlist WHERE is_deleted = 0';
   connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
@@ -89,15 +112,35 @@ app.get('/playlist/artists/', (request, response) => {
   });
 });
 
+// Selects all the artists in the playlist
+app.get('/playlist/genres/', (request, response) => {
+
+  const query = 'SELECT DISTINCT genre FROM playlist WHERE is_deleted = 0';
+  connection.query(query, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const genres = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: genres,
+      });
+    }
+  });
+});
+
+
 // Selects all the playlists items with the same artist
 app.get('/playlist/artist/:artist', (request, response) => {
   const parameters = [
     request.params.artist,
   ];
 
- // const currArtist = parameters.replace('/_/g, ""');
-
-  const query = 'SELECT * FROM playlist WHERE artist = ? AND is_deleted = 0';
+  const query = 'SELECT DISTINCT album FROM playlist WHERE artist = ? AND is_deleted = 0';
   connection.query(query, parameters, (error, rows) => {
     if (error) {
       response.status(500);
@@ -115,16 +158,65 @@ app.get('/playlist/artist/:artist', (request, response) => {
   });
 });
 
-// Selects all the playlist items with the same genre
+// Selects all the playlists items with the same genre
+app.get('/playlist/album/:artist', (request, response) => {
+  const parameters = [
+    request.params.artist,
+  ];
+
+  const query = 'SELECT DISTINCT album FROM playlist WHERE artist = ? AND is_deleted = 0';
+  connection.query(query, parameters, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const items = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: items,
+      });
+    }
+  });
+});
+
+
+
+// Selects all the playlists items with the same genre
 app.get('/playlist/genre/:genre', (request, response) => {
   const parameters = [
     request.params.genre,
   ];
 
-  const currGenre = parameters.replace('/_/g, ""');
+  const query = 'SELECT DISTINCT album FROM playlist WHERE genre = ? AND is_deleted = 0';
+  connection.query(query, parameters, (error, rows) => {
+    if (error) {
+      response.status(500);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      const items = rows.map(rowToPlaylist);
+      response.json({
+        ok: true,
+        results: items,
+      });
+    }
+  });
+});
 
-  const query = 'SELECT * FROM playlist WHERE genre = ? AND is_deleted = 0';
-  connection.query(query, currGenre, (error, rows) => {
+
+// Selects all the playlists items with the same artist
+app.get('/playlist/songs/:album', (request, response) => {
+  const parameters = [
+    request.params.album,
+  ];
+
+  const query = 'SELECT DISTINCT songName FROM playlist WHERE album = ? AND is_deleted = 0';
+  connection.query(query, parameters, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -144,7 +236,7 @@ app.get('/playlist/genre/:genre', (request, response) => {
 // Select all songNames in playlist
 app.get('/playlist/genres/', (request, response) => {
 
-  const query = 'SELECT * FROM playlist WHERE genre = ? AND is_deleted = 0';
+  const query = 'SELECT DISTINCT genre FROM playlist WHERE is_deleted = 0';
   connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
@@ -168,10 +260,8 @@ app.get('/playlist/album/:album', (request, response) => {
     request.params.album,
   ];
 
-  const currAlbum = parameters.replace('/_/g, ""');
-
   const query = 'SELECT * FROM playlist WHERE album = ? AND is_deleted = 0';
-  connection.query(query, currAlbum, (error, rows) => {
+  connection.query(query, parameters, (error, rows) => {
     if (error) {
       response.status(500);
       response.json({
@@ -189,14 +279,14 @@ app.get('/playlist/album/:album', (request, response) => {
 });
 
 // Select all the playlist items with the same song name
-app.get('/playlist/songName/:songName', (request, response) => {
+app.get('/playlist/song/:songName', (request, response) => {
   const parameters = [
     request.params.songName,
   ];
 
   const currSong = parameters.replace('/_/g, ""');
 
-  const query = 'SELECT * FROM playlist WHERE songName = ? AND is_deleted = 0';
+  const query = 'SELECT songName FROM playlist WHERE songName = ? AND is_deleted = 0';
   connection.query(query, currSong, (error, rows) => {
     if (error) {
       response.status(500);
@@ -217,7 +307,7 @@ app.get('/playlist/songName/:songName', (request, response) => {
 // Select all songNames in playlist
 app.get('/playlist/songs/', (request, response) => {
 
-  const query = 'SELECT * FROM playlist WHERE songName = ? AND is_deleted = 0';
+  const query = 'SELECT DISTINCT songName FROM playlist WHERE is_deleted = 0';
   connection.query(query, (error, rows) => {
     if (error) {
       response.status(500);
