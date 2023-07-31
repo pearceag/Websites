@@ -1,5 +1,4 @@
 # Websites
-# Author: Lexie Pearce
 
 This is a compilation of 3 websites I created.
 
