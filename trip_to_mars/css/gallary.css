@@ -1,0 +1,21 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 100vh;
+
+}
+
+.pictures {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    flex-wrap: wrap;
+}
+
+.pictures > img {
+    padding: 0.2%;
+    height: 200px;
+    flex-grow: 1;
+  }

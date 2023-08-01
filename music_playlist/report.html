@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 Report</title>
+</head>
+
+<body>
+    <center>
+        <header>
+            <h1>Project 2 Report</h1>
+        </header>
+    </center>
+    <main>
+        <p>1. This service is not a to-do list. It is a service similar to how playlists store information.</p>
+        <p>2. My app uses MySQL and only uses one table called playlist-table.</p>
+        <p>3. My app provides an Express-based web service for interacting with the database.</p>
+        <p>4. My web service is available via <code>https://project2.lexiepearce.me:8443/</code>.</p>
+        <p>5. The endpoints of the web service and any parameters are named approriately.</p>
+        <p>6. My web service sends and receives complex data as JSON.</p>
+        <p>7. The full spectruc of CRUD operations are supported.</p>
+        <p>8. I use <code>ufw</code> to block all ports, but the ones I need for SSH and my allowed web servers.</p>
+        <p>9. I created a Nginx server that allows global, encrypted access to my web service.</p>
+        <p>10. My web service supports cross-orgin resource sharing using custom middleware and an <code>options</code>
+            wildcard endpoint.</p>
+        <p>11. My web service is started using the process manager <code>pm2</code>.</p>
+        <p>12. My service is stored in my github repo: https://github.com/pearceag/cs347/tree/master/project2. </p>
+        <p>13. My database's creationg and schema scripts are included in my repository.</p>
+        <p>14. My github repo shows a stead flow of commits and pushes.</p>
+        <p>15. My service responds to <code>https://project2.lexiepearce.me:8443/report.html</code>.</p>
+
+        <h2>Endpoint Explanation</h2>
+        <p><code>'/report.html'</code>: takes you to this page</p>
+        <p><code>'/playlist'</code>: selects all items in the playlist</p>
+        <p><code>'/playlist/artist/:artist'</code>: selects all the playlist items with the same artist</p>
+        <p><code>'/playlist/genre/:genre'</code>: selects all the playlist items with the same genre</p>
+        <p><code>'/playlist/album/:album'</code>: selects all the playlist items with the same album</p>
+        <p><code>'/playlist/songName/:songName</code>: selects all the playlist items with the same song name</p>
+        <p><code>post '/playlist/</code>: inserts new item to the playlist</p>
+        <p><code>patch '/playlist/:id'</code>: updates the playlist item indicated by the id param</p>
+        <p><code>delete '/playlist/:id</code>: deletes item in playlist at indicated by the id param</p>
+
+        <p>
+        <h3>POST Curl Command</h3>
+        <code>curl --header 'Content-Type: application/json'                         --data '{"songName": "Peaches", "artist": "Bieber", "album": "Justice", "genre": "Pop"}'                         https://project2.lexiepearce.me:8443/playlist</code>
+
+        <h3>PATCH Curl Command</h3>
+        <code>curl --header 'Content-Type: application/json'                     --request PATCH                     --data '{"songName" : "AsIAm", "artist" : "Bieber", "album" : "Justice", "genre" : "Pop"}'         https://project2.lexiepearce.me:8443/playlist/1</code>
+
+
+        <h3>DELTE Curl Command</h3>
+        <code> curl --request DELETE https://project2.lexiepearce.me:8443/playlist/1</code>
+
+        </p>
+
+    </main>
+</body>
